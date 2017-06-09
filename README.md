@@ -10,6 +10,7 @@ Input should be newline delimited JSON.
 ```bash
   npm install -g node-sql-stream    
   # Client of choice (mysql, pg)    
+  # pg-query-stream needed for pg    
   npm install -g [client]
 ```
 
