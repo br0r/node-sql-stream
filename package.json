@@ -1,0 +1,14 @@
+{
+  "name": "node-sql-stream",
+  "version": "1.0.0",
+  "description": "Stream sql data directly in shell.",
+  "bin": {
+    "nsql": "bin/nsql.js"
+  },
+  "author": "Viktor Silfverström <viktor@silfverstrom.com>",
+  "license": "ISC",
+  "dependencies": {
+    "knex": "^0.13.0",
+    "split": "^1.0.0"
+  }
+}
