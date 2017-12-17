@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 var fetch = require('../lib/fetch');
 var insert = require('../lib/insert');
+var debug = require('debug')('nsql:core');
 
 function exit(msg) {
   console.error(msg);
@@ -27,6 +28,12 @@ var host = m[4] || exit('No host');
 var db = m[5] || null;
 var table = m[6] || (insertCheck ? exit('No table') : null);
 
+debug('client', client);
+debug('user', user);
+debug('host', host);
+debug('db', db);
+debug('table', table);
+
 var config = {
   client: client,
   connection: {
@@ -39,6 +46,10 @@ var config = {
 
 var conn = require('knex')(config);
 var method = insertCheck ? insert.bind(null, table) : fetch;
+conn.on('error', function(e) {
+  console.error(e);
+  process.exit(1);
+});
 
 method(conn, function(err) {
   if (err) exit('Error when closing ' + err);

@@ -8,6 +8,7 @@
   "author": "Viktor Silfverström <viktor@silfverstrom.com>",
   "license": "ISC",
   "dependencies": {
+    "debug": "^3.1.0",
     "knex": "^0.13.0",
     "split": "^1.0.0"
   }
