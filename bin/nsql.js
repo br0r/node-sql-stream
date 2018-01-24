@@ -19,18 +19,21 @@ if (process.argv.length > 4) {
 }
 
 var dburl = process.argv[2];
-var m = dburl.match(/([^:]+)\:\/\/([^:]+):([^@]+)@([^\/]+)\/([^\/]+)\/?(.+)?/);
+var m = dburl.match(/([^:]+)\:\/\/([^:]+):([^@]+)@([^\/\:]+)(\:[0-9]+)?\/([^\/]+)\/?(.+)?/);
 var client = m[1] || exit('No client');
 var user = m[2] || exit('No user');
 var password = m[3] || exit('No password');
 var host = m[4] || exit('No host');
+var port = m[5];
+if (port) port = parseInt(port.substr(1));
 
-var db = m[5] || null;
-var table = m[6] || (insertCheck ? exit('No table') : null);
+var db = m[6] || null;
+var table = m[7] || (insertCheck ? exit('No table') : null);
 
 debug('client', client);
 debug('user', user);
 debug('host', host);
+debug('port', port);
 debug('db', db);
 debug('table', table);
 
@@ -38,6 +41,7 @@ var config = {
   client: client,
   connection: {
     host: host,
+    port: port,
     user: user,
     password: password,
     database: db,
